@@ -9,10 +9,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Alias("vo")
+
 @Getter
 @Setter
 @NoArgsConstructor
+@Alias("vo")
 public class BoardVo {
 	private int seq;
 	private String title;

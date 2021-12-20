@@ -19,44 +19,38 @@ public class BoardDaoImpl implements BoardDao{
 	}
 	@Override
 	public List<BoardVo> list() {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSessionTemplate.selectList("boardDao.list");
 	}
 
 	@Override
 	public int delete(BoardVo vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSessionTemplate.delete("boardDao.delete",vo);
 	}
 
 	@Override
 	public int deleteAll() {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSessionTemplate.delete("boardDao.deleteAll");
 	}
 
 	@Override
 	public int update(BoardVo vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSessionTemplate.update("boardDao.update", vo);
 	}
 
 	@Override
 	public void insert(BoardVo vo) {
-		// TODO Auto-generated method stub
-		
+		sqlSessionTemplate.insert("boardDao.insert",vo);
 	}
 
 	@Override
 	public BoardVo select(int seq) {
-		// TODO Auto-generated method stub
-		return null;
+		BoardVo vo = sqlSessionTemplate.selectOne("boardDao.select", seq);
+		return vo;
 	}
 
 	@Override
 	public int updateReadCount(int seq) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSessionTemplate.update("boardDao.updateCount", seq);
 	}
 	
 }

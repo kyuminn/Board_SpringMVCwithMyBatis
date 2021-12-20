@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<!-- result Type은  mybatis-config에서 정의한 alias 이름 -->
+	<!-- id = 특정 쿼리문을 식별하기 위한 값 -->
+	<!-- namespace " 쿼리들 묶음 이름... -->
+	
+  <mapper namespace="boardDao">
+  	<select id="list" resultType="vo">
+  		select * from board order by seq
+  	</select>
+  	
+  	<select id="select" parameterType="int" resultType="vo">
+  		select * from board where seq=#{seq}
+  	</select>
+  	
+  	<!-- parameter로 들어온 BoardVo의 getter, setter method 자동 동작 -->
+  	<insert id="insert" parameterType="vo">
+  		insert into board (seq,title,content,writer,password,regdate,cnt) values
+  		(board_seq.nextval,#{title},#{content},#{writer},#{password},sysdate,0)
+  		<selectKey keyProperty="seq" resultType="Integer">
+  			select nvl(max(seq),0) from board
+  		</selectKey>
+  	</insert>
+  	
+  	<update id="update" parameterType="vo">
+  		update board set title=#{title}, content=#{content}, writer=#{writer} where seq=#{seq} and password=#{password}
+  	</update>
+  	
+  	<update id="updateCount" parameterType="int">
+  		update board set cnt=cnt+1 where seq=#{seq}
+  	</update>
+  	
+  	<delete id="delete" parameterType="vo">
+  		delete from board where seq=#{seq} and password=#{password}
+  	</delete>
+  	
+  	<delete id="deleteAll">
+  		delete from board
+  	</delete>
+  </mapper>

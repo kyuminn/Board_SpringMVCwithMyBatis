@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 
 import board.service.BoardService;
 import board.vo.BoardVo;
@@ -73,9 +71,6 @@ public class BoardController {
 			return "/board/edit";
 		}else {
 			BoardVo DBvalue = boardService.read(seq);
-//			System.out.println(vo.getPassword());
-//			System.out.println(password);
-//			System.out.println(DBvalue.getPassword());
 			if(DBvalue.getPassword()==password) {
 				boardService.edit(vo);
 				return "redirect:/board/list";
@@ -83,5 +78,15 @@ public class BoardController {
 		}
 		model.addAttribute("msg","비밀번호가 일치하지 않습니다");
 		return "/board/edit";
+	}
+	@RequestMapping(value="/board/delete/{seq}",method=RequestMethod.GET)
+	public String delete(@PathVariable("seq")int seq,Model model) {
+		model.addAttribute("seq",seq);
+		return "/board/delete";
+	}
+	
+	@RequestMapping(value="/board/delete/{seq}",method=RequestMethod.POST)
+	public String delete(@PathVariable("seq")int seq, int password) {
+		
 	}
 }

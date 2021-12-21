@@ -10,11 +10,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
+//@Alias("vo")
 @Getter
 @Setter
 @NoArgsConstructor
-@Alias("vo")
 public class BoardVo {
 	private int seq;
 	@Length(min=2,max=5, message="제목은 2자 이상, 5자 미만으로 입력하세요")

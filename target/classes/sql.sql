@@ -23,3 +23,14 @@ insert into board (seq,title,content,writer,password,regdate,cnt) values (board_
 insert into board (seq,title,content,writer,password,regdate,cnt) values (board_seq.nextval,'t3','c3','w3',1234, '2021-10-10 14:21:12',3);
 insert into board (seq,title,content,writer,password,regdate,cnt) values (board_seq.nextval,'t4','c4','w4',1234, '2021-10-10 14:21:12',4);
 commit;
+
+
+================================================================================================================================================
+create sequence member_seq start with 1 increment by 1 nocache noorder nocycle maxvalue 999999;
+
+create table member
+    (id number primary key,
+    email varchar2(255) not null,
+    name varchar2(150) not null,
+    password varchar2(255) not null);
+commit;

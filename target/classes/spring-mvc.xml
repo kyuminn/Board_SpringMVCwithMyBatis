@@ -11,7 +11,7 @@
 	<mvc:annotation-driven/>
 	<mvc:default-servlet-handler/>
 	<mvc:view-resolvers>
-		<mvc:jsp prefix="/WEB-INF/views" suffix=".jsp"/>
+		<mvc:jsp prefix="/WEB-INF/views/" suffix=".jsp"/>
 	</mvc:view-resolvers>
 	
 	<!-- label.properties 읽어들이기 -->

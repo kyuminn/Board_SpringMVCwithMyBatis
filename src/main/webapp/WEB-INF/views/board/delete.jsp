@@ -12,7 +12,7 @@
 		<input type="text" value="${seq }" size="1">번 글을 삭제하시겠습니까?<br>
 		<input type="password" name="password"/>
 		<input type="submit" value="삭제하기">
-		<a href="<c:url value='/board/detail/${seq }'/>">취소</a>\
+		<a href="<c:url value='/board/detail/${seq }'/>">취소</a>
 		<br>
 		${msg}
 	</form>

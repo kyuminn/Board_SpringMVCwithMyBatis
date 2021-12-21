@@ -8,6 +8,7 @@
 <title>입력 폼</title>
 </head>
 <body>
+	<!-- form tag에 action 경로를 따로 지정하지 않으면 자기 자신에게 요청함 -->
 	<form:form commandName="vo">
 		<table border="1">
 			<tr>

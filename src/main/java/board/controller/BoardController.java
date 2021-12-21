@@ -86,7 +86,19 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/board/delete/{seq}",method=RequestMethod.POST)
-	public String delete(@PathVariable("seq")int seq, int password) {
+	public String delete(@PathVariable("seq")int seq, int password,Model model) {
+		BoardVo vo = new BoardVo();
+		vo.setSeq(seq);
+		vo.setPassword(password);
 		
+		int rowCount = boardService.delete(vo);
+		if (rowCount==0) {
+			model.addAttribute("seq",seq);
+			model.addAttribute("msg","비밀번호가 일치하지 않습니다");
+			return "/board/delete";
+		}
+		else {
+			return "redirect:/board/list";
+		}
 	}
 }

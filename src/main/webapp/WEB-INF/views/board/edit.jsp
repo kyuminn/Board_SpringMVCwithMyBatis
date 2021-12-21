@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,8 +29,16 @@
 				<form:errors path="writer"/>
 				</td>
 			</tr>
-			
+			<tr>
+				<th>비밀번호</th>
+				<td>
+					<input type="password" name="password"/>
+					${msg }
+				</td>
+			</tr>
 		</table>
+		<input type="submit" value="등록">
+		<a href="<c:url value='/board/list'/>">목록</a>
 	</form:form>
 </body>
 </html>

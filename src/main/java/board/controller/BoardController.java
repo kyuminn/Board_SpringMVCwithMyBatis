@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import board.service.BoardService;
 import board.vo.BoardVo;
@@ -58,10 +60,28 @@ public class BoardController {
 		return "/board/detail";
 	}
 	
-	@RequestMapping("/board/edit/{seq}")
+	@RequestMapping(value="/board/edit/{seq}",method=RequestMethod.GET)
 	public String edit(@PathVariable("seq")int seq,Model model) {
 		BoardVo vo = boardService.read(seq);
 		model.addAttribute("vo",vo);
+		return "/board/edit";
+	}
+	
+	@RequestMapping(value="/board/edit/{seq}",method=RequestMethod.POST)
+	public String edit(@Valid@ModelAttribute("vo")BoardVo vo,@PathVariable("seq") int seq, BindingResult bindingResult, int password,Model model) {
+		if(bindingResult.hasErrors()) {
+			return "/board/edit";
+		}else {
+			BoardVo DBvalue = boardService.read(seq);
+//			System.out.println(vo.getPassword());
+//			System.out.println(password);
+//			System.out.println(DBvalue.getPassword());
+			if(DBvalue.getPassword()==password) {
+				boardService.edit(vo);
+				return "redirect:/board/list";
+			}
+		}
+		model.addAttribute("msg","비밀번호가 일치하지 않습니다");
 		return "/board/edit";
 	}
 }

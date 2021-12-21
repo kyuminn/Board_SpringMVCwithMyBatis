@@ -20,6 +20,7 @@ public class WriteValidator implements Validator {
 		ValidationUtils.rejectIfEmpty(errors, "writer", "required");
 		ValidationUtils.rejectIfEmpty(errors, "content", "required");
 		ValidationUtils.rejectIfEmpty(errors,"password" , "required");
+		
 	}
 	
 }

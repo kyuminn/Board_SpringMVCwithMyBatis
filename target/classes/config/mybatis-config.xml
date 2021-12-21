@@ -8,10 +8,14 @@
 		<setting name="cacheEnabled" value="false"/>
 		<setting name="useGeneratedKeys" value="false"/>
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<!-- db table의 컬럼명에 _ (언더바)가 있는 경우에 자바 문법으로 바꿔주는것
+		예) member_age=>memberAge
+		 -->
 	</settings>
 	<!--  
 	<typeAliases>
 		<typeAlias type="board.vo.BoardVo" alias="vo"/>
 	</typeAliases>
 	-->
+	<!-- mapper에서 vo라고 쓴 것은 board.vo.BoardVo로 !! -->
 </configuration>

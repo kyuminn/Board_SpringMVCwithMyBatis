@@ -17,7 +17,12 @@ public class MemberDaoImpl implements MemberDao{
 	
 	@Override
 	public void insert(MemberVo vo) {
-		
+		sqlSessionTemplate.insert("memberDao.insert", vo);
+	}
+
+	@Override
+	public String authenticate(String email) {
+		return sqlSessionTemplate.selectOne("memberDao.authenticate", email);
 		
 	}
 

@@ -15,5 +15,11 @@ public class MemberServiceImpl implements MemberService{
 	public void regist(MemberVo vo) {
 		memberDao.insert(vo);
 	}
-	
+
+	@Override
+	public String authenticate(String email) {
+		return memberDao.authenticate(email);
+	}
+
+
 }

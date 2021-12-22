@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import member.exception.DuplicateEmailException;
+import member.exception.MemberNotFoundException;
 import member.service.MemberService;
 import member.validator.LoginValidator;
 import member.validator.RegistValidator;
@@ -53,16 +54,22 @@ public class MemberController {
 	
 	@RequestMapping(value="/member/login",method=RequestMethod.POST)
 	public String login(@ModelAttribute("vo")MemberVo vo,Errors errors,HttpSession session) {
-		MemberVo dbValueVo;
+		MemberVo dbValueVo = null;
 		new LoginValidator().validate(vo, errors);
 		if(errors.hasErrors()) {
 			return "/member/login";
 		}else {
-			dbValueVo = memberService.authenticate(vo.getEmail());
-			if(!vo.getPassword().equals(dbValueVo.getPassword())) {
-				errors.reject("unMatching"); // 글로벌 에러 코드 표시할때는 reject method 이용
+			try {
+				dbValueVo = memberService.authenticate(vo.getEmail());
+				if(!vo.getPassword().equals(dbValueVo.getPassword())) {
+					errors.reject("unMatching"); // 글로벌 에러 코드 표시할때는 reject method 이용
+					return "/member/login";
+				}
+			}catch(MemberNotFoundException e) {
+				errors.rejectValue("email", "no");
 				return "/member/login";
 			}
+
 		}
 		session.setAttribute("authInfo", dbValueVo);
 		return "redirect:/board/list";

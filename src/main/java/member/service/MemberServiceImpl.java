@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import member.dao.MemberDao;
 import member.exception.DuplicateEmailException;
+import member.exception.MemberNotFoundException;
 import member.vo.MemberVo;
 
 @Service
@@ -23,6 +24,10 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public MemberVo authenticate(String email) {
+		MemberVo vo = memberDao.selectByEmail(email);
+		if(vo==null) {
+			throw new MemberNotFoundException();
+		}
 		return memberDao.authenticate(email);
 	}
 

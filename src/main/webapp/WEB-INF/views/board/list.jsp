@@ -40,5 +40,6 @@
 	<a href="<c:url value='/member/logout'/>">로그아웃</a>
 	<!-- c tag 사용할 때 경로 주의 -->
 	</c:if>
+	<a href='<c:url value="/"/>'>메인으로</a>
 </body>
 </html>

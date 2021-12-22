@@ -62,6 +62,7 @@ public class BoardController {
 	
 	@RequestMapping("/board/detail/{seq}")
 	public String read(@PathVariable("seq")int seq,Model model) {
+		boardService.addReadCnt(seq);
 		BoardVo vo = boardService.read(seq);
 		model.addAttribute("vo",vo);
 		return "/board/detail";

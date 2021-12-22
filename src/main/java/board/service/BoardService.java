@@ -10,4 +10,5 @@ public interface BoardService {
 	public abstract int edit(BoardVo vo);
 	public abstract void write(BoardVo vo);
 	public abstract BoardVo read(int seq);
+	public abstract void addReadCnt(int seq);
 }

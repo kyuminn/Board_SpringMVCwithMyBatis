@@ -41,5 +41,10 @@ public class BoardServiceImpl implements BoardService {
 	public BoardVo read(int seq) {
 		return boardDao.select(seq);
 	}
+	@Override
+	public void addReadCnt(int seq) {
+		boardDao.updateReadCount(seq);
+		
+	}
 
 }

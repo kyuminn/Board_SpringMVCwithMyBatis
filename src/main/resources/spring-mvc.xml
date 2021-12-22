@@ -14,6 +14,8 @@
 		<mvc:jsp prefix="/WEB-INF/views/" suffix=".jsp"/>
 	</mvc:view-resolvers>
 	
+	<mvc:view-controller path="/" view-name="main"/>
+	
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/board/**"/>

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import member.service.MemberService;
+import member.validator.RegistValidator;
 import member.vo.MemberVo;
 
 @Controller
@@ -27,6 +28,10 @@ public class MemberController {
 	
 	@RequestMapping(value="/member/regist",method=RequestMethod.POST)
 	public String regist(@ModelAttribute("vo")MemberVo vo, Errors errors) {
+		new RegistValidator().validate(vo, errors);
+		if(errors.hasErrors()) {
+			return "/member/regist";
+		}
 		memberService.regist(vo);
 		return "/member/login";
 	}

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import member.exception.ConfirmPasswordNotEqualsException;
 import member.exception.DuplicateEmailException;
 import member.exception.MemberNotFoundException;
 import member.service.MemberService;
@@ -41,6 +42,9 @@ public class MemberController {
 			memberService.regist(vo);
 		}catch(DuplicateEmailException e) {
 			errors.rejectValue("email", "duplicate");
+			return "/member/regist";
+		}catch(ConfirmPasswordNotEqualsException e) {
+			errors.rejectValue("confirmPassword", "notMatch");
 			return "/member/regist";
 		}
 		

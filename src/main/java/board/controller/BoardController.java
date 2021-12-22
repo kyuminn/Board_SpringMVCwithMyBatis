@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import board.service.BoardService;
 import board.vo.BoardVo;
-
+import member.vo.MemberVo;
+// 세션의 값을 이용해서 로그인 된 상태가 아니면 게시판에 접근할 수 없도록 하기
 @Controller
 public class BoardController {
 	@Autowired
@@ -35,8 +36,11 @@ public class BoardController {
 		return "/board/list";
 	}
 	
+	//로그인 한 상태에서 글을 작성하면 작성자 자동 입력
 	@RequestMapping(value="/board/write",method=RequestMethod.GET)
-	public String write(@ModelAttribute("vo")BoardVo vo) {
+	public String write(@ModelAttribute("vo")BoardVo vo,HttpSession session,Model model) {
+		MemberVo authInfo = (MemberVo)session.getAttribute("authInfo");
+		model.addAttribute("authInfo",authInfo);
 		return "/board/write";
 	}
 	

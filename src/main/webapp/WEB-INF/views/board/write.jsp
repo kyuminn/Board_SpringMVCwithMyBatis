@@ -23,7 +23,7 @@
 			<tr>
 				<td>작성자</td>
 				<td>
-					<form:input path="writer"/>
+					<form:input path="writer" value="${authInfo.name }"/>
 				</td>
 				<td>
 					<form:errors path="writer"/>

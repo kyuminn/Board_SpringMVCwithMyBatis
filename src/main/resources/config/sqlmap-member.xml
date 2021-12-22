@@ -6,7 +6,9 @@
 		insert into member(id,email,name,password) values(member_seq.nextval,#{email},#{name},#{password})
 	</insert>
 	
-	<select id="authenticate" parameterType="String" resultType="String">
+	<select id="authenticate" parameterType="String" resultType="member">
 		select password from member where email=#{email}
 	</select>
+	
+
 </mapper>

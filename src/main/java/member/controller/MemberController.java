@@ -1,8 +1,9 @@
 package member.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,12 +45,13 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/member/login",method=RequestMethod.POST)
-	public String login(@ModelAttribute("vo")MemberVo vo,Errors errors) {
+	public String login(@ModelAttribute("vo")MemberVo vo,Errors errors,HttpSession session) {
 		new LoginValidator().validate(vo, errors);
 		if(errors.hasErrors()) {
 			return "/member/login";
 		}else {
-			if(!memberService.authenticate(vo.getEmail()).equals(vo.getPassword())) {
+			MemberVo dbValueVo = memberService.authenticate(vo.getEmail());
+			if(!vo.getPassword().equals(dbValueVo.getPassword())) {
 				errors.reject("unMatching"); // 글로벌 에러 코드 표시할때는 reject method 이용
 				return "/member/login";
 			}

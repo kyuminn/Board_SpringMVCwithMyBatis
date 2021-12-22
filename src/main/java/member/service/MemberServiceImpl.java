@@ -17,7 +17,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public String authenticate(String email) {
+	public MemberVo authenticate(String email) {
 		return memberDao.authenticate(email);
 	}
 

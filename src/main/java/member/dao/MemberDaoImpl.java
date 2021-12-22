@@ -21,7 +21,7 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public String authenticate(String email) {
+	public MemberVo authenticate(String email) {
 		return sqlSessionTemplate.selectOne("memberDao.authenticate", email);
 		
 	}

@@ -8,6 +8,13 @@
 <title>목록</title>
 </head>
 <body>
+	<c:if test="${!empty authInfo }">
+		<table>
+			<tr>
+				<td>${authInfo.name }으로 로그인 됨</td>
+			</tr>
+		</table>
+	</c:if>
 	<table border="1">
 		<tr>
 			<th>NO</th>
@@ -29,6 +36,9 @@
 		</c:forEach>
 	</table>
 	<a href='<c:url value="/board/write"/>'>새 글</a>
+	<c:if test="${!empty authInfo }">
+	<a href="<c:url value='/member/logout'/>">로그아웃</a>
 	<!-- c tag 사용할 때 경로 주의 -->
+	</c:if>
 </body>
 </html>

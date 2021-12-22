@@ -7,7 +7,7 @@
 	</insert>
 	
 	<select id="authenticate" parameterType="String" resultType="member">
-		select password from member where email=#{email}
+		select * from member where email=#{email}
 	</select>
 	
 

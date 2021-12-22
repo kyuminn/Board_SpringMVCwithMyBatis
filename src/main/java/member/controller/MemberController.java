@@ -46,16 +46,24 @@ public class MemberController {
 	
 	@RequestMapping(value="/member/login",method=RequestMethod.POST)
 	public String login(@ModelAttribute("vo")MemberVo vo,Errors errors,HttpSession session) {
+		MemberVo dbValueVo;
 		new LoginValidator().validate(vo, errors);
 		if(errors.hasErrors()) {
 			return "/member/login";
 		}else {
-			MemberVo dbValueVo = memberService.authenticate(vo.getEmail());
+			dbValueVo = memberService.authenticate(vo.getEmail());
 			if(!vo.getPassword().equals(dbValueVo.getPassword())) {
 				errors.reject("unMatching"); // 글로벌 에러 코드 표시할때는 reject method 이용
 				return "/member/login";
 			}
 		}
+		session.setAttribute("authInfo", dbValueVo);
+		return "redirect:/board/list";
+	}
+	
+	@RequestMapping("/member/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
 		return "redirect:/board/list";
 	}
 }

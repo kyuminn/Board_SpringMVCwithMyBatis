@@ -11,6 +11,7 @@
 	<h2>게시판 웹 페이지</h2>
 	<c:if test="${empty authInfo }">
 		<input type="button" onclick="window.location.href='${pageContext.request.contextPath}/member/login'" value="로그인하기">
+		<input type="button" onclick="window.location.href='${pageContext.request.contextPath}/member/regist'" value="회원가입하기">
 	</c:if>
 	<c:if test="${!empty authInfo }">
 		<table>

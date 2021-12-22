@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import member.exception.DuplicateEmailException;
 import member.service.MemberService;
 import member.validator.LoginValidator;
 import member.validator.RegistValidator;
@@ -35,8 +36,14 @@ public class MemberController {
 		if(errors.hasErrors()) {
 			return "/member/regist";
 		}
-		memberService.regist(vo);
-		return "/member/login";
+		try {
+			memberService.regist(vo);
+		}catch(DuplicateEmailException e) {
+			errors.rejectValue("email", "duplicate");
+			return "/member/regist";
+		}
+		
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value="/member/login",method=RequestMethod.GET)
@@ -64,6 +71,6 @@ public class MemberController {
 	@RequestMapping("/member/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:/board/list";
+		return "redirect:/";
 	}
 }

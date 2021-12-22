@@ -10,5 +10,9 @@
 		select * from member where email=#{email}
 	</select>
 	
+	<select id="selectByEmail" parameterType="String" resultType="member">
+		select * from member where email=#{email}
+	</select>
+	
 
 </mapper>

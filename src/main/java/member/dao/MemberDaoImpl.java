@@ -26,4 +26,9 @@ public class MemberDaoImpl implements MemberDao{
 		
 	}
 
+	@Override
+	public MemberVo selectByEmail(String email) {
+		return sqlSessionTemplate.selectOne("memberDao.selectByEmail",email);
+	}
+
 }

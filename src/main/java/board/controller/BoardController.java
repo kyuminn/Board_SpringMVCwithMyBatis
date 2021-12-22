@@ -1,5 +1,6 @@
 package board.controller;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,10 @@ public class BoardController {
 	//Model : 컨트롤러에서 뷰로 전달해주는 정보를 담고 있는 객체, 매개변수에 선언해주면 DispatcherServlet이 알아서 생성해서 넣어줌
 	@RequestMapping("/board/list")
 	public String list(Model model) {
+//		if(session.getAttribute("authInfo")==null) {
+//			return "redirect:/member/login";
+//		}
+// 모든 요청마다 HttpSession 객체를 통해 로그인  된 상태인지 체크하는 것 보다 interceptor class 활용하기!!
 		model.addAttribute("boardList",boardService.list());
 		return "/board/list";
 	}
